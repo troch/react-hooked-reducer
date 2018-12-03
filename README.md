@@ -20,7 +20,7 @@ Using global reducers for React components has several disadvantages:
 -   You end up having to manage **initialisation or reset actions**
 -   Having multiple instances of a same component requires you to use add and remove actions, to identify actions and to add a wrapping reducer.
 
-The solution is to couple reducers to their component instances, like in [react-local-reducer](https://github.com/troch/react-local-reducer) or the newly created react hook [`useReducer`](`https://reactjs.org/docs/hooks-reference.html#usereducer`)
+The solution is to couple reducers to their component instances, like in [react-local-reducer](https://github.com/troch/react-local-reducer) or the newly created react hook [useReducer](https://reactjs.org/docs/hooks-reference.html#usereducer)
 
 However, by doing so we loose the developer experience that comes with Redux: inspecting actions and state, time travelling.
 
