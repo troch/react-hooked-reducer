@@ -55,13 +55,12 @@ export const hookedReducersEnhancer = (
                     const hookedReducerAction = isHookedReducerAction
                         ? action.payload.action
                         : action
+                    const isForCurrentReducer =
+                        action.payload && action.payload.reducerId === reducerId
 
-                    if (isHookedReducerInitAction) {
+                    if (isHookedReducerInitAction && isForCurrentReducer) {
                         acc[reducerId] = action.payload.initialState
-                    } else if (
-                        !isHookedReducerAction ||
-                        action.payload.reducerId === reducerId
-                    ) {
+                    } else if (!isHookedReducerAction || isForCurrentReducer) {
                         acc[reducerId] = hookedReducer(
                             hookedReducerState,
                             hookedReducerAction

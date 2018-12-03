@@ -12,10 +12,16 @@ import { WithHookedReducers, ACTION_TYPE_NAMESPACE } from "./storeEnhancer"
 export function useHookedReducer<S, A extends Action<any>>(
     reducer: Reducer<S, A>,
     initialState: S,
-    store: Store<S, Action<any>> & WithHookedReducers,
+    store: Store<any, Action<any>> & WithHookedReducers,
     reducerId: string
 ) {
-    const [localState, setState] = useState(initialState)
+    const initialReducerState = useMemo(() => {
+        const initialStateInStore = store.getState().hookedState[reducerId]
+        return initialStateInStore === undefined
+            ? initialState
+            : initialStateInStore
+    }, [])
+    const [localState, setState] = useState(initialReducerState)
 
     const [dispatch, teardown] = useMemo<[Dispatch<A>, () => void]>(() => {
         const dispatch = (action: A) =>
@@ -29,7 +35,7 @@ export function useHookedReducer<S, A extends Action<any>>(
 
         const teardown = store.registerHookedReducer<S, A>(
             reducer,
-            initialState,
+            initialReducerState,
             reducerId
         )
 
