@@ -21,8 +21,8 @@ const embedded = true
 
 const App = () => (
     <Provider store={store}>
-        <p>Open redux devtools to see it in action!</p>
         <div>
+            <p>Open redux devtools to see it in action!</p>
             <Counter
                 id="counter1"
                 store={store}

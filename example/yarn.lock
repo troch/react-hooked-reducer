@@ -7734,10 +7734,10 @@ react-error-overlay@^5.1.0:
   resolved "https://registry.yarnpkg.com/react-error-overlay/-/react-error-overlay-5.1.0.tgz#c516995a5652e7bfbed8b497910d5280df74a7e8"
   integrity sha512-akMy/BQT5m1J3iJIHkSb4qycq2wzllWsmmolaaFVnb+LPV9cIJ/nTud40ZsiiT0H3P+/wXIdbjx2fzF61OaeOQ==
 
-react-hooked-reducer@^0.1.0:
-  version "0.1.0"
-  resolved "https://registry.yarnpkg.com/react-hooked-reducer/-/react-hooked-reducer-0.1.0.tgz#26b1689e27d3e94f173e89d5255a9ce6426f2f06"
-  integrity sha512-sS9gIEGTvhpdTwzPzsARI7p2jzHNtEUDIwG2RH6ir3DV2ibTH5M1o94rgbqvp+F6yx32/Dg+Rq9c78rZ/DkOvA==
+react-hooked-reducer@0.1.1:
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/react-hooked-reducer/-/react-hooked-reducer-0.1.1.tgz#afa6e51384a095ef5c66be89cdb555848aa8b9dc"
+  integrity sha512-SjgGL8FknB6262RaZGOXHGwjN/RzHfQ91jSnm6JlP2wqSxFPgEmgwsSMN2jvZXGsNlAaFP6GVhAVeXTtBwu+4w==
 
 react-is@^16.3.2, react-is@^16.6.0:
   version "16.6.3"
