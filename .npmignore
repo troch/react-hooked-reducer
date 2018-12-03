@@ -1,4 +1,6 @@
+.*
 *.json
 *.md
 yarn.lock
 src
+*.config.js
