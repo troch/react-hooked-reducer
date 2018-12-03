@@ -5,7 +5,7 @@
 Use reducers in React, like with `useReducer` but with the following additional benefits:
 
 -   Receive actions from a `store`
--   Optionally embed your reducer inside a `store` and fully benefit
+-   Optionally embed your reducer inside a `store` and fully benefit from Redux developing tools
 
 ```
 yarn add react-hooked-reducer
