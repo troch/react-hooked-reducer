@@ -1,8 +1,8 @@
 {
   "name": "react-hooked-reducer",
-  "version": "0.1.0",
-  "main": "index.js",
-  "module": "index.es.js",
+  "version": "0.1.1",
+  "main": "dist/index.js",
+  "module": "dist/index.es.js",
   "repository": "git@github.com:troch/react-hooked-reducer.git",
   "author": "Thomas Roch <thomas.c.roch@gmail.com>",
   "license": "MIT",
