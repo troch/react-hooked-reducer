@@ -13,6 +13,8 @@ yarn add react-hooked-reducer
 npm install react-hooked-reducer
 ```
 
+[See it in action on CodeSandbox](https://codesandbox.io/s/github/troch/react-hooked-reducer/tree/master/example)
+
 ## Why
 
 Using global reducers for React components has several disadvantages:
