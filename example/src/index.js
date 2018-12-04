@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useState } from "react"
 import ReactDOM from "react-dom"
 import { createStore, compose } from "redux"
 import { Provider } from "react-redux"
@@ -19,36 +19,37 @@ const store = createStore(
 
 const embedded = true
 
-const App = () => (
-    <Provider store={store}>
-        <div>
-            <p>Open redux devtools to see it in action!</p>
-            <Counter
-                id="counter1"
-                store={store}
-                key="counter1"
-                embedded={embedded}
-            />
-            <Counter
-                id="counter2"
-                store={store}
-                key="counter2"
-                embedded={embedded}
-            />
-            <Counter
-                id="counter3"
-                store={store}
-                key="counter3"
-                embedded={embedded}
-            />
-            <Counter
-                id="counter4"
-                store={store}
-                key="counter4"
-                embedded={embedded}
-            />
-        </div>
-    </Provider>
-)
+const App = () => {
+    const [count, setCount] = useState(4)
+
+    return (
+        <Provider store={store}>
+            <div>
+                <p>Open redux devtools to see it in action!</p>
+                <p>
+                    <button onClick={() => setCount(count + 1)}>
+                        Add counter
+                    </button>
+
+                    <button
+                        onClick={() => setCount(count - 1)}
+                        disabled={count === 0}
+                    >
+                        Remove counter
+                    </button>
+                </p>
+
+                {Array.from({ length: count }).map((_, index) => (
+                    <Counter
+                        id={`count${index}`}
+                        store={store}
+                        key={`count${index}`}
+                        embedded={embedded}
+                    />
+                ))}
+            </div>
+        </Provider>
+    )
+}
 
 ReactDOM.render(<App />, document.getElementById("root"))
