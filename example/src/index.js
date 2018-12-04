@@ -41,9 +41,9 @@ const App = () => {
 
                 {Array.from({ length: count }).map((_, index) => (
                     <Counter
-                        id={`count${index}`}
+                        id={`counter${index}`}
                         store={store}
-                        key={`count${index}`}
+                        key={`counter${index}`}
                         embedded={embedded}
                     />
                 ))}
