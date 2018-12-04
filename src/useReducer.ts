@@ -1,10 +1,10 @@
 import {
     useReducer as useReactReducer,
     Reducer,
-    useMutationEffect,
     useMemo,
     Dispatch,
-    useState
+    useState,
+    useEffect
 } from "react"
 import { Store, Action } from "redux"
 import { WithHookedReducers, ACTION_TYPE_NAMESPACE } from "./storeEnhancer"
@@ -21,9 +21,10 @@ export function useHookedReducer<S, A extends Action<any>>(
             ? initialState
             : initialStateInStore
     }, [])
+
     const [localState, setState] = useState(initialReducerState)
 
-    const [dispatch, teardown] = useMemo<[Dispatch<A>, () => void]>(() => {
+    const dispatch = useMemo<Dispatch<A>>(() => {
         const dispatch = (action: A) =>
             store.dispatch({
                 type: `${ACTION_TYPE_NAMESPACE}/${reducerId}`,
@@ -33,16 +34,16 @@ export function useHookedReducer<S, A extends Action<any>>(
                 }
             })
 
+        return dispatch
+    }, [])
+
+    useEffect(() => {
         const teardown = store.registerHookedReducer<S, A>(
             reducer,
             initialReducerState,
             reducerId
         )
 
-        return [dispatch, teardown]
-    }, [])
-
-    useMutationEffect(() => {
         let lastHookedState = localState
         const unsubscribe = store.subscribe(() => {
             const storeState: any = store.getState()
@@ -77,7 +78,7 @@ export function useDetachedReducer<S, A extends Action<any>>(
         [dispatch]
     )
 
-    useMutationEffect(() => teardown, [])
+    useEffect(() => teardown, [])
 
     return [state, dispatch]
 }

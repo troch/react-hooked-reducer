@@ -11,6 +11,14 @@ import { Dispatch } from "react"
 type UnsubscribeFn = () => void
 export const ACTION_TYPE_NAMESPACE = "@@hooked-reducer"
 
+const omit = (obj, keyToRemove) =>
+    Object.keys(obj)
+        .filter(key => key !== keyToRemove)
+        .reduce((acc, key) => {
+            acc[key] = obj[key]
+            return acc
+        }, {})
+
 export interface WithHookedReducers {
     registerLocalDispatch: (
         dispatch: Dispatch<any>,
@@ -42,7 +50,13 @@ export const hookedReducersEnhancer = (
             action.type.indexOf(ACTION_TYPE_NAMESPACE) === 0
         const isHookedReducerInitAction =
             isHookedReducerAction && /\/init$/.test(action.type)
+        const isHookedReducerTeardownAction =
+            isHookedReducerAction && /\/teardown$/.test(action.type)
         const { hookedState = {}, ...existingState } = state
+
+        const currentHookedState = isHookedReducerTeardownAction
+            ? omit(hookedState, action.payload.reducerId)
+            : { ...hookedState }
 
         return {
             ...(isHookedReducerAction
@@ -65,11 +79,13 @@ export const hookedReducersEnhancer = (
                             hookedReducerState,
                             hookedReducerAction
                         )
+                    } else {
+                        acc[reducerId] = hookedReducerState
                     }
 
                     return acc
                 },
-                { ...hookedState }
+                currentHookedState
             )
         }
     }
@@ -102,6 +118,13 @@ export const hookedReducersEnhancer = (
 
         return () => {
             delete hookedReducers[reducerId]
+
+            store.dispatch({
+                type: `${ACTION_TYPE_NAMESPACE}/${reducerId}/teardown`,
+                payload: {
+                    reducerId
+                }
+            })
         }
     }
 
