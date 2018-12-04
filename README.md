@@ -64,8 +64,8 @@ See [https://redux.js.org/api/compose](https://redux.js.org/api/compose) for mor
         return useHookedReducer(
             reducer,
             initialState,
-            reducerId,
             store,
+            reducerId,
             process.env.NODE_ENV === "development"
         )
     }
